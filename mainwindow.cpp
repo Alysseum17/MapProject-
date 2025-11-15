@@ -48,9 +48,8 @@ void MainWindow::loadMapData()
     m_countryItems.clear();
 
     for (const CountryData &country : std::as_const(allData)) {
-        for (const QPolygonF &polygon : std::as_const(country.m_polygons)) {
 
-            CountryPolygonItem *item = new CountryPolygonItem(polygon, country);
+            CountryPolygonItem *item = new CountryPolygonItem(country);
 
             connect(item, &CountryPolygonItem::clicked,
                     this, &MainWindow::onCountryClicked);
@@ -58,7 +57,6 @@ void MainWindow::loadMapData()
             m_scene->addItem(item);
 
             m_countryItems.append(item);
-        }
     }
 
     qDebug() << "Map drawing complete!";
